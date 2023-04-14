@@ -3,8 +3,16 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import { Box } from '@mui/material';
 
 export default function PokemonCard({ name, image, types }) {
+const typeHandler = () => {
+  if(types[1]) {
+    return types[0].type.name + " | " + types[1].type.name;
+  }
+  return types[0].type.name
+}
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -13,12 +21,14 @@ export default function PokemonCard({ name, image, types }) {
         title="green iguana"
       />
       <CardContent>
+        <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography gutterBottom variant="h5" component="div">
           {name}
         </Typography>
-        <Typography gutterBottom variant="h6" component="div">
-          {types[0].type.name}
+        <Typography gutterBottom variant="caption" component="div">
+          {typeHandler()}
         </Typography>
+        </Box>
       </CardContent>
     </Card>
   );
